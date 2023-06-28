@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 import java.util.NoSuchElementException;
 
 public class BookService {
-    public static List<Product> getExpensiveBooks(List<Product> products) {
+    public static List<Product> getExpensiveBooks(List<Product> products, double cost) {
         return products.stream()
-                .filter(product -> product.getType().equals("Book") && product.getPrice() > 250)
+                .filter(product -> product.getType().equals("Book") && product.getPrice() > cost)
                 .collect(Collectors.toList());
     }
 

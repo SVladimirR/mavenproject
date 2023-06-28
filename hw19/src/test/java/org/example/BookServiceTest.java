@@ -74,11 +74,12 @@ class BookServiceTest {
         products.add(new Product("Book", 350, true, LocalDate.now()));
         products.add(new Product("Shirt", 30, true, LocalDate.now()));
 
-        List<Product> expensiveBooks = BookService.getExpensiveBooks(products);
+        double cost = 250;
+        List<Product> expensiveBooks = BookService.getExpensiveBooks(products, cost);
         Assertions.assertEquals(2, expensiveBooks.size());
         for (Product product : expensiveBooks) {
             Assertions.assertEquals("Book", product.getType());
-            Assertions.assertTrue(product.getPrice() > 250);
+            Assertions.assertTrue(product.getPrice() > cost);
         }
     }
 
