@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog-1.0.xml"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+
+    <changeSet id="createHomeworkTable" author="yourname">
+        <createTable tableName="Homework">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createLessonTable" author="yourname">
+        <createTable tableName="Lesson">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="updatedAt" type="TIMESTAMP"/>
+            <column name="homework_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Lesson" baseColumnNames="homework_id"
+                                 referencedTableName="Homework" referencedColumnNames="id"
+                                 constraintName="FK_Lesson_Homework"/>
+    </changeSet>
+
+    <changeSet id="createScheduleTable" author="yourname">
+        <createTable tableName="Schedule">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="updatedAt" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createLessonScheduleRelationTable" author="yourname">
+        <createTable tableName="Lesson_Schedule">
+            <column name="lesson_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="schedule_id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="Lesson_Schedule" baseColumnNames="lesson_id"
+                                 referencedTableName="Lesson" referencedColumnNames="id"
+                                 constraintName="FK_Lesson_Schedule_Lesson"/>
+        <addForeignKeyConstraint baseTableName="Lesson_Schedule" baseColumnNames="schedule_id"
+                                 referencedTableName="Schedule" referencedColumnNames="id"
+                                 constraintName="FK_Lesson_Schedule_Schedule"/>
+    </changeSet>
+
+</databaseChangeLog>
