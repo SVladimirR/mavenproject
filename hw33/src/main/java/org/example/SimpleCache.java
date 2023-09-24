@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.logging.Logger;
 
 
@@ -28,11 +29,22 @@ import java.util.logging.Logger;
         }
 
 
+//        public Object get(String cache, String key) {
+//            if (caches.containsKey(cache)) {
+//                return caches.get(cache).get(key);
+//            }
+//            return null;
+//        }
+
         public Object get(String cache, String key) {
-            if (caches.containsKey(cache)) {
-                return caches.get(cache).get(key);
+            if (!caches.containsKey(cache)) {
+                throw new NoSuchElementException("cache '" + cache + "' does not exist");
             }
-            return null;
+            Map<String, Object> innerCache = caches.get(cache);
+            if (!innerCache.containsKey(key)) {
+                throw new NoSuchElementException("object '" + key + "' not found '" + cache + "'");
+            }
+            return innerCache.get(key);
         }
 
 

@@ -15,6 +15,7 @@ public class Main {
         String str = (String) cache.get("stringCache", "key1");
         int num = (int) cache.get("intCache", "key2");
 
+
         if (str != null) {
             System.out.println("String from cache: " + str);
         } else {
