@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name = "product1")
+@Table(name = "product2")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
