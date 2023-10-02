@@ -7,8 +7,9 @@ import java.util.List;
 @Data
 public class Order {
     private Long id;
-    private Date date;
-    private double cost;
+    private String userName;
+    private Double cost;
+    private String description;
     private List<Product> products;
 }
 
